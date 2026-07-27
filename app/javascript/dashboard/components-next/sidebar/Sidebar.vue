@@ -719,6 +719,11 @@ const menuItems = computed(() => {
           label: t('SIDEBAR.WHATSAPP'),
           to: accountScopedRoute('campaigns_whatsapp_index'),
         },
+        {
+          name: 'Brevo',
+          label: t('SIDEBAR.BREVO'),
+          to: accountScopedRoute('campaigns_brevo_index'),
+        },
       ],
     },
     {
