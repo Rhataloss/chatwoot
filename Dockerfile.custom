@@ -1,0 +1,105 @@
+# Dockerfile.custom
+# Basado en la imagen oficial de Chatwoot, con el panel de campañas Brevo
+# ya copiado y compilado en tiempo de build (no en runtime).
+#
+# Construir desde ~/chatwoot (el repo local editado en el VPS):
+#   docker build -t chatwoot-custom:brevo -f Dockerfile.custom .
+
+FROM chatwoot/chatwoot:latest
+
+ARG SECRET_KEY_BASE=dummy_build_time_key_1234567890
+ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
+ENV NODE_OPTIONS="--max-old-space-size=6144"
+WORKDIR /app
+
+# --- 1. Copiar los archivos nuevos/modificados del panel Brevo ---
+
+COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/BrevoCampaignsAPI.js \
+     app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/
+
+COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/BrevoCampaignForm.vue \
+     app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/
+
+COPY app/javascript/dashboard/constants/editor.js \
+     app/javascript/dashboard/constants/
+
+COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/BrevoCampaignDialog.vue \
+     app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/BrevoCampaign/
+
+COPY app/javascript/dashboard/routes/dashboard/campaigns/pages/BrevoCampaignsPage.vue \
+     app/javascript/dashboard/routes/dashboard/campaigns/pages/
+COPY app/javascript/dashboard/components-next/Campaigns/CampaignLayout.vue app/javascript/dashboard/components-next/Campaigns/
+
+COPY app/javascript/dashboard/i18n/locale/en/campaign.json \
+     app/javascript/dashboard/i18n/locale/en/campaign.json
+
+COPY app/javascript/dashboard/i18n/locale/es/campaign.json \
+     app/javascript/dashboard/i18n/locale/es/campaign.json
+
+COPY app/javascript/dashboard/routes/dashboard/campaigns/campaigns.routes.js \
+     app/javascript/dashboard/routes/dashboard/campaigns/
+
+COPY app/javascript/dashboard/components-next/sidebar/Sidebar.vue \
+     app/javascript/dashboard/components-next/sidebar/
+
+COPY app/javascript/dashboard/routes/dashboard/onboarding/inbox-setup/InboxFacebookForm.vue \
+     app/javascript/dashboard/routes/dashboard/onboarding/inbox-setup/
+
+COPY app/javascript/dashboard/i18n/locale/en/settings.json \
+     app/javascript/dashboard/i18n/locale/en/settings.json
+
+COPY app/javascript/dashboard/i18n/locale/es/settings.json \
+     app/javascript/dashboard/i18n/locale/es/settings.json
+
+COPY app/javascript/dashboard/components-next/button/Button.vue \
+     app/javascript/dashboard/components-next/button/
+
+COPY app/javascript/dashboard/components-next/dialog/Dialog.vue \
+     app/javascript/dashboard/components-next/dialog/
+
+COPY app/javascript/dashboard/components-next/combobox/ComboBox.vue \
+     app/javascript/dashboard/components-next/combobox/
+
+COPY app/javascript/dashboard/routes/dashboard/settings/inbox/channels/Facebook.vue \
+     app/javascript/dashboard/routes/dashboard/settings/inbox/channels/
+
+COPY config/routes.rb config/routes.rb
+COPY app/services/whatsapp/templates_service.rb \
+     app/services/whatsapp/templates_service.rb
+COPY app/controllers/api/v1/accounts/whatsapp/templates_controller.rb \
+     app/controllers/api/v1/accounts/whatsapp/templates_controller.rb
+
+COPY app/javascript/dashboard/api/MetaTemplatesAPI.js \
+     app/javascript/dashboard/api/
+
+COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/MetaTemplate/MetaTemplateForm.vue \
+     app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/MetaTemplate/
+
+COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/MetaTemplate/MetaTemplateDialog.vue \
+     app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/MetaTemplate/
+
+COPY app/javascript/dashboard/routes/dashboard/campaigns/pages/MetaTemplatesPage.vue \
+     app/javascript/dashboard/routes/dashboard/campaigns/pages/
+# --- 2. Instalar pnpm en la versión exacta que pide package.json ---
+# Esta imagen no trae npm/corepack (Node es un binario standalone),
+# así que instalamos pnpm con su script standalone oficial.
+
+RUN apk add --no-cache curl && \
+    curl -fsSL https://get.pnpm.io/install.sh | ENV="/root/.shrc" SHELL="/bin/sh" sh -
+
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN pnpm --version
+# --- 3. Instalar dependencias ---
+# NODE_ENV=development durante el install para que traiga devDependencies
+# (vite, esbuild, etc. son necesarias para compilar aunque el build final sea de producción)
+
+RUN NODE_ENV=development pnpm install --frozen-lockfile
+
+# --- 4. Compilar los assets con Vite en modo producción ---
+
+RUN RAILS_ENV=production NODE_ENV=production bin/vite build
+
+# La imagen resultante ya tiene los assets nuevos en /app/public/vite,
+# listos para servirse igual que en la imagen oficial.

@@ -92,6 +92,7 @@ watch(
   <div
     ref="comboboxRef"
     class="relative w-full min-w-0"
+    data-dialog-ignore-outside-click
     :class="{
       'cursor-not-allowed': disabled,
       'group/combobox': !disabled,

@@ -211,6 +211,148 @@
         "SUCCESS_MESSAGE": "Campaña borrada satisfactoriamente",
         "ERROR_MESSAGE": "Se presentó un error. Por favor intente nuevamente."
       }
+    },
+    "BREVO": {
+      "HEADER_TITLE": "Email (Brevo)",
+      "NEW_CAMPAIGN": "Nueva campaña",
+      "EMPTY_STATE": {
+        "TITLE": "Todavía no hay campañas",
+        "SUBTITLE": "Creá una campaña de email para enviarla a través de Brevo, usando las etiquetas de Chatwoot como audiencia."
+      },
+      "CREATE": {
+        "TITLE": "Nueva campaña de email",
+        "FORM": {
+          "LABEL_FIELD": {
+            "LABEL": "Etiqueta (audiencia)",
+            "PLACEHOLDER": "Elegí una etiqueta de Chatwoot",
+            "INFO": "Los contactos con esta etiqueta se sincronizan a una lista de Brevo.",
+            "ERROR": "Elegí una etiqueta"
+          },
+          "SUBJECT": {
+            "LABEL": "Asunto",
+            "PLACEHOLDER": "Asunto del email",
+            "ERROR": "El asunto es obligatorio"
+          },
+          "CONTENT": {
+            "LABEL": "Contenido",
+            "PLACEHOLDER": "Contenido HTML del email",
+            "ERROR": "El contenido es obligatorio"
+          },
+          "SEND_MODE": {
+            "LABEL": "Envío",
+            "DRAFT": "Guardar como borrador en Brevo",
+            "NOW": "Enviar ahora",
+            "SCHEDULE": "Programar fecha y hora",
+            "SCHEDULE_ERROR": "Elegí una fecha y hora futuras para programar el envío"
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "CREATE": "Crear campaña"
+          }
+        }
+      },
+      "API": {
+        "SUCCESS_MESSAGE": "Campaña creada correctamente",
+        "ERROR_MESSAGE": "Hubo un error al crear la campaña"
+      },
+      "HISTORY": {
+        "LOADING": "Cargando campañas...",
+        "ERROR": "No se pudieron cargar las campañas",
+        "SUBJECT": "Asunto",
+        "STATUS": "Estado",
+        "SENT_AT": "Fecha de envío",
+        "SENT": "Enviados",
+        "OPENS": "Aperturas",
+        "CLICKS": "Clics",
+        "BOUNCES": "Rebotes"
+      }
+    },
+    "META_TEMPLATES": {
+      "HEADER_TITLE": "Plantillas de WhatsApp (Meta)",
+      "NEW_CAMPAIGN": "Nueva plantilla",
+      "NO_INBOX": "No hay bandeja de WhatsApp conectada. Conectá una bandeja de WhatsApp para gestionar plantillas.",
+      "INBOX_FIELD": {
+        "LABEL": "Bandeja de WhatsApp",
+        "PLACEHOLDER": "Elegí una bandeja de WhatsApp"
+      },
+      "EMPTY_STATE": {
+        "TITLE": "Todavía no hay plantillas",
+        "SUBTITLE": "Creá una plantilla de WhatsApp para empezar a enviarla a través de Meta."
+      },
+      "CREATE": {
+        "TITLE": "Nueva plantilla de WhatsApp",
+        "FORM": {
+          "NAME_FIELD": {
+            "LABEL": "Nombre de la plantilla",
+            "PLACEHOLDER": "confirmacion_pedido",
+            "INFO": "Solo letras minúsculas, números y guiones bajos",
+            "ERROR": "Ingresá un nombre válido (letras minúsculas, números y guiones bajos)"
+          },
+          "CATEGORY": {
+            "LABEL": "Categoría",
+            "ERROR": "Elegí una categoría",
+            "OPTIONS": {
+              "MARKETING": "Marketing",
+              "UTILITY": "Utilidad",
+              "AUTHENTICATION": "Autenticación"
+            }
+          },
+          "LANGUAGE": {
+            "LABEL": "Idioma",
+            "ERROR": "Elegí un idioma"
+          },
+          "HEADER_FIELD": {
+            "TOGGLE": "Agregar encabezado",
+            "PLACEHOLDER": "Texto del encabezado",
+            "ERROR": "El texto del encabezado es obligatorio"
+          },
+          "BODY_FIELD": {
+            "LABEL": "Cuerpo",
+            "PLACEHOLDER": "Mensaje de la plantilla. Usá {'{'}1{'}'}, {'{'}2{'}'}... para variables",
+            "INFO": "Usá {'{'}1{'}'}, {'{'}2{'}'}, etc. como marcadores para contenido dinámico",
+            "ERROR": "El texto del cuerpo es obligatorio"
+          },
+          "FOOTER_FIELD": {
+            "TOGGLE": "Agregar pie de página",
+            "PLACEHOLDER": "Texto del pie de página",
+            "ERROR": "El texto del pie de página es obligatorio"
+          },
+          "BUTTONS_FIELD": {
+            "LABEL": "Botones",
+            "ADD": "+ Agregar botón",
+            "REMOVE": "Quitar",
+            "TEXT_PLACEHOLDER": "Texto del botón",
+            "URL_PLACEHOLDER": "https://ejemplo.com",
+            "PHONE_PLACEHOLDER": "+1 555 555 5555",
+            "ERROR": "Completá todos los campos del botón",
+            "TYPES": {
+              "QUICK_REPLY": "Respuesta rápida",
+              "URL": "URL del sitio web",
+              "PHONE_NUMBER": "Número de teléfono"
+            }
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "CREATE": "Crear plantilla"
+          }
+        }
+      },
+      "API": {
+        "SUCCESS_MESSAGE": "Plantilla creada correctamente",
+        "ERROR_MESSAGE": "Hubo un error al crear la plantilla"
+      },
+      "HISTORY": {
+        "LOADING": "Cargando plantillas...",
+        "ERROR": "No se pudieron cargar las plantillas",
+        "NAME": "Nombre",
+        "CATEGORY": "Categoría",
+        "LANGUAGE": "Idioma",
+        "STATUS": "Estado",
+        "DELETE": "Eliminar",
+        "DELETING": "Eliminando...",
+        "DELETE_CONFIRM": "¿Eliminar la plantilla \"{name}\"? Esto no se puede deshacer.",
+        "DELETE_ERROR": "No se pudo eliminar la plantilla"
+      }
     }
   }
 }

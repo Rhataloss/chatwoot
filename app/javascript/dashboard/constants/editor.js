@@ -148,6 +148,22 @@ export const FORMATTING = {
       'redo',
     ],
   },
+  'Context::Campaign': {
+    marks: ['strong', 'em', 'code', 'link', 'strike'],
+    nodes: ['bulletList', 'orderedList', 'codeBlock', 'blockquote', 'image'],
+    menu: [
+      'strong',
+      'em',
+      'code',
+      'link',
+      'strike',
+      'bulletList',
+      'orderedList',
+      'undo',
+      'redo',
+      'imageUpload',
+    ],
+  },
   'Context::MessageSignature': {
     marks: ['strong', 'em', 'link'],
     nodes: ['image'],

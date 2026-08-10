@@ -30,9 +30,23 @@ const handleButtonClick = () => {
           </span>
           <div
             v-on-click-outside="[
-              () => emit('close'),
+              e => {
+                const dialogEl = e?.target?.closest('dialog');
+                console.log('CAMPAIGNLAYOUT CLOSE target:', e?.target);
+                console.log('CAMPAIGNLAYOUT closest dialog:', dialogEl);
+                console.log(
+                  'CAMPAIGNLAYOUT dialog has open attr:',
+                  dialogEl?.hasAttribute('open')
+                );
+                if (dialogEl?.hasAttribute('open')) {
+                  return;
+                }
+                emit('close');
+              },
               // This will prevent closing the modal when the editor Create link popup is open
-              { ignore: ['dialog.ProseMirror-prompt-backdrop'] },
+              {
+                ignore: ['dialog.ProseMirror-prompt-backdrop', 'dialog[open]'],
+              },
             ]"
             class="relative group/campaign-button"
           >

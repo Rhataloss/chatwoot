@@ -363,6 +363,8 @@
     "LIVE_CHAT": "Live Chat",
     "SMS": "SMS",
     "WHATSAPP": "WhatsApp",
+    "BREVO": "Email (Brevo)",
+    "META_TEMPLATES": "Plantillas Meta",
     "CAMPAIGNS": "Campañas",
     "ONGOING": "En Curso",
     "ONE_OFF": "One Off",

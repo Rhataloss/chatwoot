@@ -211,6 +211,148 @@
         "SUCCESS_MESSAGE": "Campaign deleted successfully",
         "ERROR_MESSAGE": "There was an error. Please try again."
       }
+    },
+    "BREVO": {
+      "HEADER_TITLE": "Email (Brevo)",
+      "NEW_CAMPAIGN": "New campaign",
+      "EMPTY_STATE": {
+        "TITLE": "No campaigns yet",
+        "SUBTITLE": "Create an email campaign to send it through Brevo, using Chatwoot labels as the audience."
+      },
+      "CREATE": {
+        "TITLE": "New email campaign",
+        "FORM": {
+          "LABEL_FIELD": {
+            "LABEL": "Label (audience)",
+            "PLACEHOLDER": "Choose a Chatwoot label",
+            "INFO": "Contacts with this label are synced to a Brevo list.",
+            "ERROR": "Choose a label"
+          },
+          "SUBJECT": {
+            "LABEL": "Subject",
+            "PLACEHOLDER": "Email subject",
+            "ERROR": "Subject is required"
+          },
+          "CONTENT": {
+            "LABEL": "Content",
+            "PLACEHOLDER": "Email HTML content",
+            "ERROR": "Content is required"
+          },
+          "SEND_MODE": {
+            "LABEL": "Sending",
+            "DRAFT": "Save as draft in Brevo",
+            "NOW": "Send now",
+            "SCHEDULE": "Schedule date and time",
+            "SCHEDULE_ERROR": "Choose a future date and time to schedule the send"
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancel",
+            "CREATE": "Create campaign"
+          }
+        }
+      },
+      "API": {
+        "SUCCESS_MESSAGE": "Campaign created successfully",
+        "ERROR_MESSAGE": "There was an error creating the campaign"
+      },
+      "HISTORY": {
+        "LOADING": "Loading campaigns...",
+        "ERROR": "Couldn't load campaigns",
+        "SUBJECT": "Subject",
+        "STATUS": "Status",
+        "SENT_AT": "Sent date",
+        "SENT": "Sent",
+        "OPENS": "Opens",
+        "CLICKS": "Clicks",
+        "BOUNCES": "Bounces"
+      }
+    },
+    "META_TEMPLATES": {
+      "HEADER_TITLE": "WhatsApp Templates (Meta)",
+      "NEW_CAMPAIGN": "New template",
+      "NO_INBOX": "No WhatsApp inbox connected. Connect a WhatsApp inbox to manage templates.",
+      "INBOX_FIELD": {
+        "LABEL": "WhatsApp inbox",
+        "PLACEHOLDER": "Choose a WhatsApp inbox"
+      },
+      "EMPTY_STATE": {
+        "TITLE": "No templates yet",
+        "SUBTITLE": "Create a WhatsApp template to start sending it through Meta."
+      },
+      "CREATE": {
+        "TITLE": "New WhatsApp template",
+        "FORM": {
+          "NAME_FIELD": {
+            "LABEL": "Template name",
+            "PLACEHOLDER": "order_confirmation",
+            "INFO": "Lowercase letters, numbers and underscores only",
+            "ERROR": "Enter a valid name (lowercase letters, numbers and underscores)"
+          },
+          "CATEGORY": {
+            "LABEL": "Category",
+            "ERROR": "Choose a category",
+            "OPTIONS": {
+              "MARKETING": "Marketing",
+              "UTILITY": "Utility",
+              "AUTHENTICATION": "Authentication"
+            }
+          },
+          "LANGUAGE": {
+            "LABEL": "Language",
+            "ERROR": "Choose a language"
+          },
+          "HEADER_FIELD": {
+            "TOGGLE": "Add a header",
+            "PLACEHOLDER": "Header text",
+            "ERROR": "Header text is required"
+          },
+          "BODY_FIELD": {
+            "LABEL": "Body",
+            "PLACEHOLDER": "Template message. Use {'{'}1{'}'}, {'{'}2{'}'}... for variables",
+            "INFO": "Use {'{'}1{'}'}, {'{'}2{'}'}, etc. as placeholders for dynamic content",
+            "ERROR": "Body text is required"
+          },
+          "FOOTER_FIELD": {
+            "TOGGLE": "Add a footer",
+            "PLACEHOLDER": "Footer text",
+            "ERROR": "Footer text is required"
+          },
+          "BUTTONS_FIELD": {
+            "LABEL": "Buttons",
+            "ADD": "+ Add button",
+            "REMOVE": "Remove",
+            "TEXT_PLACEHOLDER": "Button text",
+            "URL_PLACEHOLDER": "https://example.com",
+            "PHONE_PLACEHOLDER": "+1 555 555 5555",
+            "ERROR": "Fill in all button fields",
+            "TYPES": {
+              "QUICK_REPLY": "Quick reply",
+              "URL": "Website URL",
+              "PHONE_NUMBER": "Phone number"
+            }
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancel",
+            "CREATE": "Create template"
+          }
+        }
+      },
+      "API": {
+        "SUCCESS_MESSAGE": "Template created successfully",
+        "ERROR_MESSAGE": "There was an error creating the template"
+      },
+      "HISTORY": {
+        "LOADING": "Loading templates...",
+        "ERROR": "Couldn't load templates",
+        "NAME": "Name",
+        "CATEGORY": "Category",
+        "LANGUAGE": "Language",
+        "STATUS": "Status",
+        "DELETE": "Delete",
+        "DELETING": "Deleting...",
+        "DELETE_CONFIRM": "Delete template \"{name}\"? This cannot be undone.",
+        "DELETE_ERROR": "Couldn't delete the template"
+      }
     }
   }
 }

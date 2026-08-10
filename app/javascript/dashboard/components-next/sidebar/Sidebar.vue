@@ -724,6 +724,11 @@ const menuItems = computed(() => {
           label: t('SIDEBAR.BREVO'),
           to: accountScopedRoute('campaigns_brevo_index'),
         },
+        {
+          name: 'Meta Templates',
+          label: t('SIDEBAR.META_TEMPLATES'),
+          to: accountScopedRoute('campaigns_meta_templates_index'),
+        },
       ],
     },
     {

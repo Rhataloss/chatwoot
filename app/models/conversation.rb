@@ -53,6 +53,22 @@
 
 class Conversation < ApplicationRecord
   include Labelable
+
+  def update_labels(labels = nil)
+    super
+    sync_labels_to_contact
+  end
+
+  def add_labels(new_labels = nil)
+    super
+    sync_labels_to_contact
+  end
+
+  private def sync_labels_to_contact
+    return unless contact
+
+    contact.add_labels(label_list)
+  end
   include LlmFormattable
   include AssignmentHandler
   include AutoAssignmentHandler
