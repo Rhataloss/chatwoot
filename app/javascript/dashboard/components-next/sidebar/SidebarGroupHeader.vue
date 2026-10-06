@@ -12,6 +12,7 @@ const props = defineProps({
   isActive: { type: Boolean, default: false },
   hasActiveChild: { type: Boolean, default: false },
   getterKeys: { type: Object, default: () => ({}) },
+  dataTour: { type: String, default: '' },
 });
 
 const emit = defineEmits(['toggle']);
@@ -31,6 +32,7 @@ const count = computed(() =>
     draggable="false"
     :to="to"
     :title="label"
+    :data-tour="props.dataTour"
     :class="{
       'text-n-slate-12 bg-n-alpha-2 font-medium': isActive && !hasActiveChild,
       'text-n-slate-12 font-medium': hasActiveChild,

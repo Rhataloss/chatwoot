@@ -41,6 +41,7 @@ defineExpose({ fetchCampaigns });
 
 <template>
   <CampaignLayout
+    data-tour-campaign-page="brevo"
     :header-title="t('CAMPAIGN.BREVO.HEADER_TITLE')"
     :button-label="t('CAMPAIGN.BREVO.NEW_CAMPAIGN')"
     @click="openCreateDialog"

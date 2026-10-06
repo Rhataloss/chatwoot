@@ -57,6 +57,7 @@ const toggleConversationLayout = () => {
 
 <template>
   <div
+    data-tour="chat-list-header"
     class="flex items-center justify-between gap-2 px-3 h-[3.25rem]"
     :class="{
       'border-b border-n-strong': hasAppliedFiltersOrActiveFolders,
@@ -138,7 +139,7 @@ const toggleConversationLayout = () => {
           @click="emit('deleteFolders')"
         />
       </template>
-      <div v-else class="relative">
+      <div v-else class="relative" data-tour="filter-button">
         <NextButton
           id="toggleConversationFilterButton"
           v-tooltip.right="$t('FILTER.TOOLTIP_LABEL')"

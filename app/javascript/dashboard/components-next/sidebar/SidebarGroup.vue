@@ -18,6 +18,7 @@ const props = defineProps({
   activeOn: { type: Array, default: () => [] },
   children: { type: Array, default: undefined },
   getterKeys: { type: Object, default: () => ({}) },
+  dataTour: { type: String, default: '' },
 });
 
 const {
@@ -264,6 +265,7 @@ watch(
           :to="to && !hasChildren ? to : undefined"
           type="button"
           class="flex items-center justify-center size-10 rounded-lg"
+          :data-tour="props.dataTour"
           :class="{
             'text-n-slate-12 bg-n-alpha-2': isActive || hasActiveChild,
             'text-n-slate-11 hover:bg-n-alpha-2': !isActive && !hasActiveChild,
@@ -298,6 +300,7 @@ watch(
         :has-active-child="hasActiveChild"
         :expandable="hasChildren"
         :is-expanded="isExpanded"
+        :data-tour="props.dataTour"
         @toggle="toggleTrigger"
       />
       <ul

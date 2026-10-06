@@ -146,3 +146,80 @@ body {
     letter-spacing: -0.24px;
   }
 }
+
+// driver.js user-guide popover (rendered outside the Vue app)
+.driver-popover.woot-driver-popover {
+  color: white !important;
+  background: #1b2437 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+  padding: 16px 20px !important;
+  max-width: 360px !important;
+  z-index: 99999 !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-title {
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  line-height: 1.4 !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-description {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 16px !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-progress-text {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 11px !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-controls {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn {
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn:hover {
+  opacity: 0.9 !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn-secondary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn-secondary:hover,
+.driver-popover.woot-driver-popover .driver-popover-btn-close:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn-primary {
+  background: #3b82f6 !important;
+  color: white !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-btn-primary:hover {
+  background: #2563eb !important;
+}
+
+.driver-popover.woot-driver-popover .driver-popover-arrow {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}

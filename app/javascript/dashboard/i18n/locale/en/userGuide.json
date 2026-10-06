@@ -1,0 +1,143 @@
+{
+  "USER_GUIDE": {
+    "TITLE": "User Guide",
+    "SUBTITLE": "Learn how to use Chatwoot step by step",
+    "FULL_TOUR": "Complete Tour",
+    "FULL_TOUR_DESCRIPTION": "Walk through all the main features of the dashboard",
+    "SELECT_MODULE": "Or choose a module",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous",
+    "DONE": "Done",
+    "CLOSE": "Close",
+    "STEP_COUNTER": "Step {{current}} of {{total}}",
+    "MODULES": {
+      "FULL": "Complete Tour",
+      "FULL_DESCRIPTION": "Walk through every main feature from start to finish",
+      "SIDEBAR": "Sidebar & Navigation",
+      "SIDEBAR_DESCRIPTION": "Learn the main navigation and how to move around",
+      "CONVERSATIONS": "Conversations",
+      "CONVERSATIONS_DESCRIPTION": "Understand the conversation list, filters and reply area",
+      "CONTACTS": "Contacts",
+      "CONTACTS_DESCRIPTION": "Manage your contacts, search and profiles",
+      "CAMPAIGNS": "Campaigns",
+      "CAMPAIGNS_DESCRIPTION": "WhatsApp, email (Brevo) and Meta template campaigns",
+      "SETTINGS": "Settings",
+      "SETTINGS_DESCRIPTION": "Configure your account and check reports",
+      "REPORTS": "Reports"
+    },
+    "STEPS": {
+      "SIDEBAR": {
+        "TITLE": "Main Sidebar",
+        "DESCRIPTION": "This is the main navigation sidebar. It gives you access to all areas of the dashboard. You can resize it by dragging the right edge, or collapse it to save space."
+      },
+      "ACCOUNT_SWITCHER": {
+        "TITLE": "Account Switcher",
+        "DESCRIPTION": "Switch between different organizations or accounts. You can also create a new account from this menu."
+      },
+      "SEARCH_BAR": {
+        "TITLE": "Search",
+        "DESCRIPTION": "Quickly search across conversations, contacts, and more. You can also use the keyboard shortcut Cmd+K to open the search from anywhere."
+      },
+      "COMPOSE_BUTTON": {
+        "TITLE": "New Conversation",
+        "DESCRIPTION": "Start a new conversation with a contact. Select the inbox and channel to begin a fresh chat."
+      },
+      "NAV_INBOX": {
+        "TITLE": "My Inbox",
+        "DESCRIPTION": "Your personal notification inbox. See all the conversations and notifications assigned to you in one place."
+      },
+      "NAV_CONVERSATIONS": {
+        "TITLE": "Conversations",
+        "DESCRIPTION": "Access all your conversations. Filter by All, Mentions, Participating, Unattended, Folders, Teams, Channels, or Labels."
+      },
+      "NAV_CONTACTS": {
+        "TITLE": "Contacts",
+        "DESCRIPTION": "Manage all your contacts. View, search, filter, and edit contact profiles with their conversation history."
+      },
+      "NAV_REPORTS": {
+        "TITLE": "Reports",
+        "DESCRIPTION": "View analytics and performance metrics. Track conversations, agent activity, CSAT scores, and more."
+      },
+      "NAV_SETTINGS": {
+        "TITLE": "Settings",
+        "DESCRIPTION": "Configure your account, inboxes, agents, teams, automation, integrations, and all other settings."
+      },
+      "PROFILE_MENU": {
+        "TITLE": "Profile Menu",
+        "DESCRIPTION": "Access your profile settings, change appearance, view keyboard shortcuts, read documentation, or log out."
+      },
+      "CHAT_LIST": {
+        "TITLE": "Chat List",
+        "DESCRIPTION": "This panel shows all your conversations. Click any conversation to open it. Conversations are sorted by most recent activity."
+      },
+      "CHAT_LIST_HEADER": {
+        "TITLE": "Chat List Header",
+        "DESCRIPTION": "See the total count of conversations and the current filter. Use the action buttons to manage your view."
+      },
+      "FILTER_BUTTON": {
+        "TITLE": "Filters",
+        "DESCRIPTION": "Filter conversations by status, sort order, and more. Save your favorite filters as Folders for quick access."
+      },
+      "CONVERSATION_BOX": {
+        "TITLE": "Conversation Area",
+        "DESCRIPTION": "This is the main chat area where you read and reply to messages. The contact's messages appear on the left, your replies on the right."
+      },
+      "REPLY_BOX": {
+        "TITLE": "Reply Box",
+        "DESCRIPTION": "Type your response here. You can use canned responses, attach files, insert emojis, and format your text. Press Enter to send."
+      },
+      "CONTACT_SIDEBAR_TOGGLE": {
+        "TITLE": "Contact Panel",
+        "DESCRIPTION": "Toggle the contact information sidebar. View and edit contact details, attributes, labels, and conversation history."
+      },
+      "CONTACTS_HEADER": {
+        "TITLE": "Contacts Page",
+        "DESCRIPTION": "View and manage all your contacts. Search, filter, sort, and create new contacts from here."
+      },
+      "CONTACTS_SEARCH": {
+        "TITLE": "Search Contacts",
+        "DESCRIPTION": "Search for contacts by name, email, phone number, or any custom attribute."
+      },
+      "CONTACTS_LIST": {
+        "TITLE": "Contacts List",
+        "DESCRIPTION": "Browse your contacts. Click on any contact to view their full profile, conversations, and details."
+      },
+      "CAMPAIGNS_WHATSAPP": {
+        "TITLE": "WhatsApp Campaigns",
+        "DESCRIPTION": "Create and manage WhatsApp outreach campaigns sent directly through the WhatsApp integration."
+      },
+      "CAMPAIGNS_BREVO": {
+        "TITLE": "Email Campaigns (Brevo)",
+        "DESCRIPTION": "Send bulk email campaigns using the Brevo integration. Track sends, opens, clicks and bounces."
+      },
+      "CAMPAIGNS_META": {
+        "TITLE": "Meta Templates",
+        "DESCRIPTION": "Manage your WhatsApp message templates approved via the Meta Graph API."
+      },
+      "CAMPAIGNS_NEW": {
+        "TITLE": "New Campaign",
+        "DESCRIPTION": "Click this button to start creating a new campaign on the current channel."
+      },
+      "CAMPAIGNS_BREVO_NEW": {
+        "TITLE": "New Email Campaign",
+        "DESCRIPTION": "Create a new email campaign, choose your audience and connect your Brevo account."
+      },
+      "CAMPAIGNS_META_NEW": {
+        "TITLE": "New Template",
+        "DESCRIPTION": "Create a new WhatsApp message template to be submitted for Meta approval."
+      },
+      "SETTINGS_HEADER": {
+        "TITLE": "Settings",
+        "DESCRIPTION": "Configure every aspect of your Chatwoot account. Settings are organized in categories on the left."
+      },
+      "SETTINGS_NAV": {
+        "TITLE": "Settings Navigation",
+        "DESCRIPTION": "Navigate between different settings sections: Account, Agents, Teams, Inboxes, Integrations, and more."
+      },
+      "REPORTS_HEADER": {
+        "TITLE": "Reports Dashboard",
+        "DESCRIPTION": "Monitor your team's performance with detailed reports and analytics. Track response times, resolution rates, and customer satisfaction."
+      }
+    }
+  }
+}

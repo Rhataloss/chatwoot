@@ -64,6 +64,7 @@ useKeyboardEvents(keyboardEvents);
       ghost
       slate
       sm
+      data-tour="contact-sidebar-toggle"
       class="!rounded-full transition-all duration-[250ms] ease-out active:!scale-95 active:!brightness-105 active:duration-75"
       :class="{
         'bg-n-alpha-2 active:shadow-sm': isContactSidebarOpen,

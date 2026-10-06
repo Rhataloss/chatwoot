@@ -1253,7 +1253,12 @@ export default {
 
 <template>
   <ReplyBoxBanner :message="message" :is-on-private-note="isOnPrivateNote" />
-  <div ref="replyEditor" class="reply-box" :class="replyBoxClass">
+  <div
+    ref="replyEditor"
+    data-tour="reply-box"
+    class="reply-box"
+    :class="replyBoxClass"
+  >
     <ReplyTopPanel
       :mode="replyType"
       :conversation-id="conversationId"

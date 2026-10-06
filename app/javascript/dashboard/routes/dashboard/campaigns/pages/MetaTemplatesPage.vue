@@ -90,6 +90,7 @@ defineExpose({ fetchTemplates });
 
 <template>
   <CampaignLayout
+    data-tour-campaign-page="meta"
     :header-title="t('CAMPAIGN.META_TEMPLATES.HEADER_TITLE')"
     :button-label="t('CAMPAIGN.META_TEMPLATES.NEW_CAMPAIGN')"
     @click="openCreateDialog"

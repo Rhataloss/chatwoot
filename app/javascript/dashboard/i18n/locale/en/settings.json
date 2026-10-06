@@ -253,7 +253,8 @@
     "SUPER_ADMIN_CONSOLE": "SuperAdmin console",
     "DOCS": "Read documentation",
     "CHANGELOG": "Changelog",
-    "LOGOUT": "Log out"
+    "LOGOUT": "Log out",
+    "USER_GUIDE": "User Guide"
   },
   "APP_GLOBAL": {
     "TRIAL_MESSAGE": "days trial remaining.",

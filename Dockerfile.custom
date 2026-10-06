@@ -10,6 +10,10 @@ FROM chatwoot/chatwoot:latest
 ARG SECRET_KEY_BASE=dummy_build_time_key_1234567890
 ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 ENV NODE_OPTIONS="--max-old-space-size=6144"
+
+# Forzar recompilación de assets Vite: incrementar al tocar JS/Vue/SCSS de la guía
+ARG CACHE_BUST=user-guide-v1
+ENV CACHE_BUST=${CACHE_BUST}
 WORKDIR /app
 
 # --- 1. Copiar los archivos nuevos/modificados del panel Brevo ---
@@ -80,6 +84,41 @@ COPY app/javascript/dashboard/components-next/Campaigns/Pages/CampaignPage/MetaT
 
 COPY app/javascript/dashboard/routes/dashboard/campaigns/pages/MetaTemplatesPage.vue \
      app/javascript/dashboard/routes/dashboard/campaigns/pages/
+
+# --- Guía de usuario (user-guide/ + driver.js + data-tour selectores) ---
+COPY app/javascript/dashboard/components-next/user-guide/ app/javascript/dashboard/components-next/user-guide/
+COPY app/javascript/dashboard/i18n/locale/en/userGuide.json app/javascript/dashboard/i18n/locale/en/userGuide.json
+COPY app/javascript/dashboard/i18n/locale/es/userGuide.json app/javascript/dashboard/i18n/locale/es/userGuide.json
+COPY app/javascript/dashboard/i18n/locale/en/index.js app/javascript/dashboard/i18n/locale/en/index.js
+COPY app/javascript/dashboard/i18n/locale/es/index.js app/javascript/dashboard/i18n/locale/es/index.js
+COPY app/javascript/dashboard/i18n/locale/en/settings.json app/javascript/dashboard/i18n/locale/en/settings.json
+
+COPY app/javascript/dashboard/components-next/sidebar/Sidebar.vue app/javascript/dashboard/components-next/sidebar/
+COPY app/javascript/dashboard/components-next/sidebar/SidebarGroup.vue app/javascript/dashboard/components-next/sidebar/
+COPY app/javascript/dashboard/components-next/sidebar/SidebarGroupHeader.vue app/javascript/dashboard/components-next/sidebar/
+COPY app/javascript/dashboard/components-next/sidebar/SidebarProfileMenu.vue app/javascript/dashboard/components-next/sidebar/
+COPY app/javascript/dashboard/components-next/Campaigns/CampaignLayout.vue app/javascript/dashboard/components-next/Campaigns/
+COPY app/javascript/dashboard/components-next/Contacts/ContactsHeader/ContactHeader.vue app/javascript/dashboard/components-next/Contacts/ContactsHeader/
+COPY app/javascript/dashboard/components-next/Contacts/Pages/ContactsList.vue app/javascript/dashboard/components-next/Contacts/Pages/
+COPY app/javascript/dashboard/components-next/Conversation/SidepanelSwitch.vue app/javascript/dashboard/components-next/Conversation/
+COPY app/javascript/dashboard/components/ChatList.vue app/javascript/dashboard/components/
+COPY app/javascript/dashboard/components/ChatListHeader.vue app/javascript/dashboard/components/
+COPY app/javascript/dashboard/components/widgets/conversation/ConversationBox.vue app/javascript/dashboard/components/widgets/conversation/
+COPY app/javascript/dashboard/components/widgets/conversation/ReplyBox.vue app/javascript/dashboard/components/widgets/conversation/
+
+COPY app/javascript/dashboard/routes/dashboard/campaigns/pages/BrevoCampaignsPage.vue app/javascript/dashboard/routes/dashboard/campaigns/pages/
+COPY app/javascript/dashboard/routes/dashboard/campaigns/pages/WhatsAppCampaignsPage.vue app/javascript/dashboard/routes/dashboard/campaigns/pages/
+COPY app/javascript/dashboard/routes/dashboard/contacts/pages/ContactsIndex.vue app/javascript/dashboard/routes/dashboard/contacts/pages/
+COPY app/javascript/dashboard/routes/dashboard/settings/SettingsWrapper.vue app/javascript/dashboard/routes/dashboard/settings/
+COPY app/javascript/dashboard/routes/dashboard/settings/components/BaseSettingsHeader.vue app/javascript/dashboard/routes/dashboard/settings/components/
+COPY app/javascript/dashboard/routes/dashboard/settings/reports/components/ReportHeader.vue app/javascript/dashboard/routes/dashboard/settings/reports/components/
+COPY app/javascript/dashboard/routes/dashboard/settings/reports/components/ReportsWrapper.vue app/javascript/dashboard/routes/dashboard/settings/reports/components/
+
+COPY app/javascript/dashboard/assets/scss/_woot.scss app/javascript/dashboard/assets/scss/
+
+# package.json + lockfile para que pnpm instale driver.js (guía de usuario)
+COPY package.json package.json
+COPY pnpm-lock.yaml pnpm-lock.yaml
 # --- 2. Instalar pnpm en la versión exacta que pide package.json ---
 # Esta imagen no trae npm/corepack (Node es un binario standalone),
 # así que instalamos pnpm con su script standalone oficial.

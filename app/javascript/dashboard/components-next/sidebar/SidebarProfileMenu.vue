@@ -135,6 +135,7 @@ const allowedMenuItems = computed(() => {
   >
     <template #trigger="{ toggle, isOpen }">
       <button
+        data-tour="profile-menu"
         class="flex gap-2 items-center p-1 text-left rounded-lg cursor-pointer hover:bg-n-alpha-1"
         :class="[
           { 'bg-n-alpha-1': isOpen },

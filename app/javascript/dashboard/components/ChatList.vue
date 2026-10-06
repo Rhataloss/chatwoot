@@ -884,6 +884,7 @@ watch(conversationFilters, (newVal, oldVal) => {
 
 <template>
   <div
+    data-tour="chat-list"
     class="flex flex-col flex-shrink-0 conversations-list-wrap bg-n-surface-1 relative"
     :class="[
       { hidden: !showConversationList },

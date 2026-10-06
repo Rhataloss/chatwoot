@@ -2,7 +2,6 @@
 import { h, ref, computed, onMounted, watch } from 'vue';
 import { provideSidebarContext, useSidebarResize } from './provider';
 import { useAccount } from 'dashboard/composables/useAccount';
-import { useConfig } from 'dashboard/composables/useConfig';
 import { useKbd } from 'dashboard/composables/utils/useKbd';
 import { useMapGetter } from 'dashboard/composables/store';
 import { useStore } from 'vuex';
@@ -15,6 +14,7 @@ import { useWindowSize, useEventListener } from '@vueuse/core';
 import Button from 'dashboard/components-next/button/Button.vue';
 import SidebarGroup from './SidebarGroup.vue';
 import SidebarProfileMenu from './SidebarProfileMenu.vue';
+import UserGuideButton from 'dashboard/components-next/user-guide/UserGuideButton.vue';
 import SidebarChangelogCard from './SidebarChangelogCard.vue';
 import SidebarChangelogButton from './SidebarChangelogButton.vue';
 import ChannelLeaf from './ChannelLeaf.vue';
@@ -44,14 +44,8 @@ const emit = defineEmits([
 ]);
 
 const { accountScopedRoute, isOnChatwootCloud } = useAccount();
-const { isEnterprise } = useConfig();
 const store = useStore();
 
-// Calls run on the enterprise-only API (cloud runs enterprise); hide the entry
-// on community so it doesn't lead to a dashboard/CTA the backend can't serve.
-const isCallsAvailable = computed(
-  () => isOnChatwootCloud.value || isEnterprise
-);
 const searchShortcut = useKbd([`$mod`, 'k']);
 const { t } = useI18n();
 
@@ -370,11 +364,13 @@ const menuItems = computed(() => {
       getterKeys: {
         count: 'notifications/getUnreadCount',
       },
+      dataTour: 'nav-inbox',
     },
     {
       name: 'Conversation',
       label: t('SIDEBAR.CONVERSATIONS'),
       icon: 'i-lucide-message-circle',
+      dataTour: 'nav-conversations',
       children: [
         {
           name: 'All',
@@ -492,100 +488,12 @@ const menuItems = computed(() => {
         },
       ],
     },
-    {
-      name: 'Captain',
-      icon: 'i-woot-captain',
-      label: t('SIDEBAR.CAPTAIN'),
-      activeOn: ['captain_assistants_create_index'],
-      children: [
-        {
-          name: 'Overview',
-          label: t('SIDEBAR.CAPTAIN_OVERVIEW'),
-          activeOn: ['captain_assistants_overview_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_overview_index',
-          }),
-        },
-        {
-          name: 'FAQs',
-          label: t('SIDEBAR.CAPTAIN_RESPONSES'),
-          activeOn: [
-            'captain_assistants_responses_index',
-            'captain_assistants_responses_pending',
-          ],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_responses_index',
-          }),
-        },
-        {
-          name: 'Documents',
-          label: t('SIDEBAR.CAPTAIN_DOCUMENTS'),
-          activeOn: ['captain_assistants_documents_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_documents_index',
-          }),
-        },
-        {
-          name: 'Scenarios',
-          label: t('SIDEBAR.CAPTAIN_SCENARIOS'),
-          activeOn: ['captain_assistants_scenarios_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_scenarios_index',
-          }),
-        },
-        {
-          name: 'Playground',
-          label: t('SIDEBAR.CAPTAIN_PLAYGROUND'),
-          activeOn: ['captain_assistants_playground_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_playground_index',
-          }),
-        },
-        {
-          name: 'Inboxes',
-          label: t('SIDEBAR.CAPTAIN_INBOXES'),
-          activeOn: ['captain_assistants_inboxes_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_inboxes_index',
-          }),
-        },
-        {
-          name: 'Tools',
-          label: t('SIDEBAR.CAPTAIN_TOOLS'),
-          activeOn: ['captain_tools_index'],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_tools_index',
-          }),
-        },
-        {
-          name: 'Settings',
-          label: t('SIDEBAR.CAPTAIN_SETTINGS'),
-          activeOn: [
-            'captain_assistants_settings_index',
-            'captain_assistants_guidelines_index',
-            'captain_assistants_guardrails_index',
-          ],
-          to: accountScopedRoute('captain_assistants_index', {
-            navigationPath: 'captain_assistants_settings_index',
-          }),
-        },
-      ],
-    },
-    ...(isCallsAvailable.value
-      ? [
-          {
-            name: 'Calls',
-            label: t('SIDEBAR.CALLS'),
-            icon: 'i-lucide-phone',
-            to: accountScopedRoute('calls_dashboard_index'),
-            activeOn: ['calls_dashboard_index'],
-          },
-        ]
-      : []),
+
     {
       name: 'Contacts',
       label: t('SIDEBAR.CONTACTS'),
       icon: 'i-lucide-contact',
+      dataTour: 'nav-contacts',
       children: [
         {
           name: 'All Contacts',
@@ -670,6 +578,7 @@ const menuItems = computed(() => {
       name: 'Reports',
       label: t('SIDEBAR.REPORTS'),
       icon: 'i-lucide-chart-spline',
+      dataTour: 'nav-reports',
       children: [
         {
           name: 'Report Overview',
@@ -705,24 +614,9 @@ const menuItems = computed(() => {
       icon: 'i-lucide-megaphone',
       children: [
         {
-          name: 'Live chat',
-          label: t('SIDEBAR.LIVE_CHAT'),
-          to: accountScopedRoute('campaigns_livechat_index'),
-        },
-        {
-          name: 'SMS',
-          label: t('SIDEBAR.SMS'),
-          to: accountScopedRoute('campaigns_sms_index'),
-        },
-        {
           name: 'WhatsApp',
           label: t('SIDEBAR.WHATSAPP'),
           to: accountScopedRoute('campaigns_whatsapp_index'),
-        },
-        {
-          name: 'Brevo',
-          label: t('SIDEBAR.BREVO'),
-          to: accountScopedRoute('campaigns_brevo_index'),
         },
         {
           name: 'Meta Templates',
@@ -732,56 +626,10 @@ const menuItems = computed(() => {
       ],
     },
     {
-      name: 'Portals',
-      label: t('SIDEBAR.HELP_CENTER.TITLE'),
-      icon: 'i-lucide-library-big',
-      children: [
-        {
-          name: 'Articles',
-          label: t('SIDEBAR.HELP_CENTER.ARTICLES'),
-          activeOn: [
-            'portals_articles_index',
-            'portals_articles_new',
-            'portals_articles_edit',
-          ],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_articles_index',
-          }),
-        },
-        {
-          name: 'Categories',
-          label: t('SIDEBAR.HELP_CENTER.CATEGORIES'),
-          activeOn: [
-            'portals_categories_index',
-            'portals_categories_articles_index',
-            'portals_categories_articles_edit',
-          ],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_categories_index',
-          }),
-        },
-        {
-          name: 'Locales',
-          label: t('SIDEBAR.HELP_CENTER.LOCALES'),
-          activeOn: ['portals_locales_index'],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_locales_index',
-          }),
-        },
-        {
-          name: 'Settings',
-          label: t('SIDEBAR.HELP_CENTER.SETTINGS'),
-          activeOn: ['portals_settings_index'],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_settings_index',
-          }),
-        },
-      ],
-    },
-    {
       name: 'Settings',
       label: t('SIDEBAR.SETTINGS'),
       icon: 'i-lucide-bolt',
+      dataTour: 'nav-settings',
       children: [
         {
           name: 'Settings Account Settings',
@@ -956,6 +804,7 @@ const menuItems = computed(() => {
         ],
       },
     ]"
+    data-tour="sidebar"
     class="bg-n-background flex flex-col text-sm pb-px fixed top-0 ltr:left-0 rtl:right-0 h-full z-40 w-[200px] md:w-auto md:relative md:flex-shrink-0 md:ltr:translate-x-0 md:rtl:translate-x-0 ltr:border-r rtl:border-l border-n-weak"
     :class="[
       {
@@ -981,6 +830,7 @@ const menuItems = computed(() => {
         <template v-if="isEffectivelyCollapsed">
           <SidebarAccountSwitcher
             is-collapsed
+            data-tour="account-switcher"
             @show-create-account-modal="emit('showCreateAccountModal')"
           />
         </template>
@@ -991,6 +841,7 @@ const menuItems = computed(() => {
           <div class="flex-shrink-0 w-px h-3 bg-n-strong" />
           <SidebarAccountSwitcher
             class="flex-grow -mx-1 min-w-0"
+            data-tour="account-switcher"
             @show-create-account-modal="emit('showCreateAccountModal')"
           />
         </template>
@@ -1002,6 +853,7 @@ const menuItems = computed(() => {
         <RouterLink
           v-if="!isEffectivelyCollapsed"
           :to="{ name: 'search' }"
+          data-tour="search-bar"
           class="flex gap-2 items-center px-2 py-1 w-full h-7 rounded-lg outline outline-1 outline-n-weak bg-n-button-color transition-all duration-100 ease-out"
         >
           <span class="flex-shrink-0 i-lucide-search size-4 text-n-slate-10" />
@@ -1028,6 +880,7 @@ const menuItems = computed(() => {
               icon="i-lucide-pen-line"
               color="slate"
               size="sm"
+              data-tour="compose-button"
               class="dark:hover:!bg-n-slate-9/30"
               :class="[
                 isEffectivelyCollapsed
@@ -1083,6 +936,10 @@ const menuItems = computed(() => {
           :is-collapsed="isEffectivelyCollapsed"
           @open-key-shortcut-modal="emit('openKeyShortcutModal')"
         />
+        <UserGuideButton v-if="!isEffectivelyCollapsed">
+          {{ t('USER_GUIDE.TITLE') }}
+        </UserGuideButton>
+        <UserGuideButton v-else />
       </div>
     </section>
     <!-- Resize Handle (desktop only) -->

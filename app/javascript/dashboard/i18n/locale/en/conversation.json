@@ -64,6 +64,7 @@
     "UNSUPPORTED_MESSAGE_TIKTOK": "This message is unsupported. You can view this message on the TikTok app.",
     "UNSUPPORTED_MESSAGE_WHATSAPP": "This message is unsupported. You can view this message on the WhatsApp app.",
     "SUCCESS_DELETE_MESSAGE": "Message deleted successfully",
+    "SUCCESS_SEND_MESSAGE": "Message sent successfully",
     "FAIL_DELETE_MESSSAGE": "Couldn't delete message! Try again",
     "NO_RESPONSE": "No response",
     "RESPONSE": "Response",

@@ -42,6 +42,7 @@ import contentTemplates from './contentTemplates.json';
 import mfa from './mfa.json';
 import onboarding from './onboarding.json';
 import sessionLimit from './sessionLimit.json';
+import userGuide from './userGuide.json';
 import yearInReview from './yearInReview.json';
 
 export default {
@@ -89,5 +90,6 @@ export default {
   ...mfa,
   ...onboarding,
   ...sessionLimit,
+  ...userGuide,
   ...yearInReview,
 };
