@@ -282,6 +282,10 @@
       "CREATE": {
         "TITLE": "New WhatsApp template",
         "FORM": {
+          "CHAR_COUNTER": {
+            "NEAR": "{remaining} characters left",
+            "OVER": "The text exceeds the maximum of {limit} characters"
+          },
           "NAME_FIELD": {
             "LABEL": "Template name",
             "PLACEHOLDER": "order_confirmation",

@@ -282,6 +282,10 @@
       "CREATE": {
         "TITLE": "Nueva plantilla de WhatsApp",
         "FORM": {
+          "CHAR_COUNTER": {
+            "NEAR": "Quedan {remaining} caracteres",
+            "OVER": "El texto supera el máximo de {limit} caracteres"
+          },
           "NAME_FIELD": {
             "LABEL": "Nombre de la plantilla",
             "PLACEHOLDER": "confirmacion_pedido",

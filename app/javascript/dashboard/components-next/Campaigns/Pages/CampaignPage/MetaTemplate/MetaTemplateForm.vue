@@ -11,6 +11,12 @@ const { t } = useI18n();
 
 const NAME_PATTERN = /^[a-z0-9_]+$/;
 const MAX_BUTTONS = 3;
+const MAX_CHARS = {
+  header: 60,
+  body: 1024,
+  footer: 60,
+  button: 25,
+};
 
 const categoryOptions = computed(() => [
   {
@@ -95,13 +101,23 @@ const rules = {
   language: { required },
   headerText: {
     requiredIfEnabled: value => !state.headerEnabled || !!value,
+    withinLimit: value =>
+      !state.headerEnabled || (value || '').length <= MAX_CHARS.header,
   },
-  bodyText: { required, minLength: minLength(1) },
+  bodyText: {
+    required,
+    minLength: minLength(1),
+    withinLimit: value => (value || '').length <= MAX_CHARS.body,
+  },
   footerText: {
     requiredIfEnabled: value => !state.footerEnabled || !!value,
+    withinLimit: value =>
+      !state.footerEnabled || (value || '').length <= MAX_CHARS.footer,
   },
   buttons: {
     valid: helpers.withMessage('invalid buttons', buttonsValid),
+    withinLimit: value =>
+      value.every(button => (button.text || '').length <= MAX_CHARS.button),
   },
 };
 
@@ -121,6 +137,49 @@ const formErrors = computed(() => ({
   footerText: getErrorMessage('footerText', 'FOOTER_FIELD'),
   buttons: getErrorMessage('buttons', 'BUTTONS_FIELD'),
 }));
+
+const counterBaseKey = 'CAMPAIGN.META_TEMPLATES.CREATE.FORM.CHAR_COUNTER';
+
+const charInfo = (value, limit) => {
+  const count = (value || '').length;
+  return {
+    count,
+    limit,
+    isNear: count >= limit * 0.8 && count <= limit,
+    isOver: count > limit,
+  };
+};
+
+const headerChars = computed(() =>
+  charInfo(state.headerText, MAX_CHARS.header)
+);
+const bodyChars = computed(() => charInfo(state.bodyText, MAX_CHARS.body));
+const footerChars = computed(() =>
+  charInfo(state.footerText, MAX_CHARS.footer)
+);
+const getButtonChars = button => charInfo(button.text, MAX_CHARS.button);
+
+const limitErrors = computed(() => ({
+  headerText:
+    state.headerEnabled && headerChars.value.isOver
+      ? t(`${counterBaseKey}.OVER`, { limit: MAX_CHARS.header })
+      : '',
+  bodyText: bodyChars.value.isOver
+    ? t(`${counterBaseKey}.OVER`, { limit: MAX_CHARS.body })
+    : '',
+  footerText:
+    state.footerEnabled && footerChars.value.isOver
+      ? t(`${counterBaseKey}.OVER`, { limit: MAX_CHARS.footer })
+      : '',
+  buttons: state.buttons.some(b => (b.text || '').length > MAX_CHARS.button)
+    ? t(`${counterBaseKey}.OVER`, { limit: MAX_CHARS.button })
+    : '',
+}));
+
+const nearLimitMessage = chars =>
+  chars.isNear
+    ? t(`${counterBaseKey}.NEAR`, { remaining: chars.limit - chars.count })
+    : '';
 
 const addButton = () => {
   if (state.buttons.length >= MAX_BUTTONS) return;
@@ -247,9 +306,25 @@ defineExpose({ v$, getPayload, reset });
         :placeholder="
           t('CAMPAIGN.META_TEMPLATES.CREATE.FORM.HEADER_FIELD.PLACEHOLDER')
         "
-        :message="formErrors.headerText"
-        :message-type="formErrors.headerText ? 'error' : 'info'"
+        :message="formErrors.headerText || limitErrors.headerText"
+        :message-type="
+          limitErrors.headerText || formErrors.headerText ? 'error' : 'info'
+        "
       />
+      <p
+        v-if="state.headerEnabled"
+        class="mt-1 text-xs"
+        :class="{
+          'text-n-ruby-9': headerChars.isOver,
+          'text-n-amber-11': headerChars.isNear && !headerChars.isOver,
+          'text-n-slate-11': !headerChars.isNear && !headerChars.isOver,
+        }"
+      >
+        {{ headerChars.count }}/{{ headerChars.limit }}
+        <template v-if="!headerChars.isOver">
+          {{ nearLimitMessage(headerChars) }}
+        </template>
+      </p>
     </div>
 
     <!-- BODY (requerido) -->
@@ -268,6 +343,19 @@ defineExpose({ v$, getPayload, reset });
       />
       <p class="mt-1 text-xs text-n-slate-11">
         {{ t('CAMPAIGN.META_TEMPLATES.CREATE.FORM.BODY_FIELD.INFO') }}
+      </p>
+      <p
+        class="mt-1 text-xs"
+        :class="{
+          'text-n-ruby-9': bodyChars.isOver,
+          'text-n-amber-11': bodyChars.isNear && !bodyChars.isOver,
+          'text-n-slate-11': !bodyChars.isNear && !bodyChars.isOver,
+        }"
+      >
+        {{ bodyChars.count }}/{{ bodyChars.limit }}
+        <template v-if="!bodyChars.isOver">
+          {{ nearLimitMessage(bodyChars) }}
+        </template>
       </p>
       <p v-if="formErrors.bodyText" class="text-xs text-n-ruby-9">
         {{ formErrors.bodyText }}
@@ -288,9 +376,25 @@ defineExpose({ v$, getPayload, reset });
         :placeholder="
           t('CAMPAIGN.META_TEMPLATES.CREATE.FORM.FOOTER_FIELD.PLACEHOLDER')
         "
-        :message="formErrors.footerText"
-        :message-type="formErrors.footerText ? 'error' : 'info'"
+        :message="formErrors.footerText || limitErrors.footerText"
+        :message-type="
+          limitErrors.footerText || formErrors.footerText ? 'error' : 'info'
+        "
       />
+      <p
+        v-if="state.footerEnabled"
+        class="mt-1 text-xs"
+        :class="{
+          'text-n-ruby-9': footerChars.isOver,
+          'text-n-amber-11': footerChars.isNear && !footerChars.isOver,
+          'text-n-slate-11': !footerChars.isNear && !footerChars.isOver,
+        }"
+      >
+        {{ footerChars.count }}/{{ footerChars.limit }}
+        <template v-if="!footerChars.isOver">
+          {{ nearLimitMessage(footerChars) }}
+        </template>
+      </p>
     </div>
 
     <!-- BUTTONS (opcional, dinámico, máx 3) -->
@@ -337,6 +441,18 @@ defineExpose({ v$, getPayload, reset });
             )
           "
         />
+        <p
+          class="mt-1 text-xs"
+          :class="{
+            'text-n-ruby-9': getButtonChars(button).isOver,
+            'text-n-amber-11':
+              getButtonChars(button).isNear && !getButtonChars(button).isOver,
+            'text-n-slate-11':
+              !getButtonChars(button).isNear && !getButtonChars(button).isOver,
+          }"
+        >
+          {{ getButtonChars(button).count }}/{{ getButtonChars(button).limit }}
+        </p>
 
         <Input
           v-if="button.type === 'URL'"
@@ -359,8 +475,11 @@ defineExpose({ v$, getPayload, reset });
         />
       </div>
 
-      <p v-if="formErrors.buttons" class="text-xs text-n-ruby-9">
-        {{ formErrors.buttons }}
+      <p
+        v-if="formErrors.buttons || limitErrors.buttons"
+        class="text-xs text-n-ruby-9"
+      >
+        {{ formErrors.buttons || limitErrors.buttons }}
       </p>
     </div>
   </div>
